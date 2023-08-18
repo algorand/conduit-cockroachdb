@@ -1,0 +1,37 @@
+version: '3.5'
+services:
+  cockroach1:
+    image: cockroachdb/cockroach:latest
+    container_name: cockroach1
+    hostname: roach1
+    volumes:
+      - 'roach1:/cockroach/cockroach-data'
+    ports:
+      - "26257:26257"
+      - "8080:8080"
+    command: "start-single-node --insecure && ./cockroach sql --execute=\"CREATE DATABASE indexer;\" --insecure"
+  algod:
+    image: algorand/algod:stable
+    container_name: algod-testnet
+    environment:
+      ADMIN_TOKEN: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      TOKEN: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      PROFILE: "conduit"
+      NETWORK: "testnet"
+    ports:
+      - "4190:8080"
+  conduit:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    depends_on:
+      - algod
+      - cockroach1
+    volumes:
+      - './run_data:/data'
+    network_mode: "host"
+    restart: on-failure:3
+volumes:
+  roach1:
+    external: false
+
