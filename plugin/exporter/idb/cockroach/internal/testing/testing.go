@@ -7,10 +7,10 @@ import (
 	"os"
 	"testing"
 
+	"github.com/algorand/conduit-cockroachdb/plugin/exporter/idb/cockroach/internal/schema"
 	"github.com/jackc/pgx/v4/pgxpool"
 	"github.com/orlangure/gnomock"
 	"github.com/orlangure/gnomock/preset/cockroachdb"
-	"github.com/shiqizng/cockroachdb-exporter/plugin/exporter/idb/cockroach/internal/schema"
 	"github.com/stretchr/testify/require"
 )
 

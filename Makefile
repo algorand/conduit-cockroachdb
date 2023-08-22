@@ -41,6 +41,9 @@ docker-stop:
 	docker rm conduit-template-follower > /dev/null 2>&1 || true
 
 demo:
+	cd cmd/conduit && env GOOS=linux GOARCH=arm go build
+	docker-compose up -d --build cockroach1
+	docker exec -it cockroach1 ./cockroach sql --execute="CREATE DATABASE indexer;" --insecure
 	docker-compose up --build
 
 indexerapi:

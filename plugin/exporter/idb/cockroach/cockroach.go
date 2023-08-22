@@ -6,20 +6,21 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"math"
 	"sync"
 
+	"github.com/algorand/conduit-cockroachdb/plugin/exporter/idb"
+	"github.com/algorand/conduit-cockroachdb/plugin/exporter/idb/cockroach/internal/encoding"
+	"github.com/algorand/conduit-cockroachdb/plugin/exporter/idb/cockroach/internal/schema"
+	"github.com/algorand/conduit-cockroachdb/plugin/exporter/idb/cockroach/internal/types"
+	iutil "github.com/algorand/conduit-cockroachdb/plugin/exporter/idb/cockroach/internal/util"
+	"github.com/algorand/conduit-cockroachdb/plugin/exporter/idb/cockroach/internal/writer"
 	"github.com/algorand/go-algorand-sdk/v2/protocol"
 	"github.com/algorand/go-algorand-sdk/v2/protocol/config"
 	"github.com/jackc/pgconn"
 	"github.com/jackc/pgerrcode"
 	"github.com/jackc/pgx/v4"
 	"github.com/jackc/pgx/v4/pgxpool"
-	"github.com/shiqizng/cockroachdb-exporter/plugin/exporter/idb"
-	"github.com/shiqizng/cockroachdb-exporter/plugin/exporter/idb/cockroach/internal/encoding"
-	"github.com/shiqizng/cockroachdb-exporter/plugin/exporter/idb/cockroach/internal/schema"
-	"github.com/shiqizng/cockroachdb-exporter/plugin/exporter/idb/cockroach/internal/types"
-	iutil "github.com/shiqizng/cockroachdb-exporter/plugin/exporter/idb/cockroach/internal/util"
-	"github.com/shiqizng/cockroachdb-exporter/plugin/exporter/idb/cockroach/internal/writer"
 	log "github.com/sirupsen/logrus"
 
 	"github.com/algorand/indexer/idb/migration"
@@ -221,6 +222,14 @@ func (db *IndexerDb) LoadGenesis(genesis sdk.Genesis) error {
 			if err != nil {
 				return fmt.Errorf("LoadGenesis() err: %w", err)
 			}
+
+			// migration state key is needed to be compatible with the current indexer
+			// no migration needed. set migration state to math.MaxUint64
+			state := types.MigrationState{
+				NextMigration: math.MaxInt,
+			}
+			migrationStateJSON := encoding.EncodeMigrationState(&state)
+			db.setMetastate(nil, schema.MigrationMetastateKey, string(migrationStateJSON))
 		} else if err != nil {
 			return fmt.Errorf("LoadGenesis() err: %w", err)
 		} else {

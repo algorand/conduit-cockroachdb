@@ -9,8 +9,8 @@ import (
 	"github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v2"
 
-	"github.com/shiqizng/cockroachdb-exporter/plugin/exporter/idb"
-	_ "github.com/shiqizng/cockroachdb-exporter/plugin/exporter/idb/cockroach"
+	"github.com/algorand/conduit-cockroachdb/plugin/exporter/idb"
+	_ "github.com/algorand/conduit-cockroachdb/plugin/exporter/idb/cockroach"
 
 	"github.com/algorand/conduit/conduit/data"
 	"github.com/algorand/conduit/conduit/plugins"

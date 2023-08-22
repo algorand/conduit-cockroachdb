@@ -4,9 +4,9 @@ import (
 	"encoding/base64"
 	"fmt"
 
+	"github.com/algorand/conduit-cockroachdb/plugin/exporter/idb"
+	"github.com/algorand/conduit-cockroachdb/plugin/exporter/idb/cockroach/internal/types"
 	"github.com/algorand/go-codec/codec"
-	"github.com/shiqizng/cockroachdb-exporter/plugin/exporter/idb"
-	"github.com/shiqizng/cockroachdb-exporter/plugin/exporter/idb/cockroach/internal/types"
 
 	itypes "github.com/algorand/indexer/v3/types"
 	"github.com/algorand/indexer/v3/util"

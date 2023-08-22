@@ -1,4 +1,4 @@
-module github.com/shiqizng/cockroachdb-exporter
+module github.com/algorand/conduit-cockroachdb
 
 go 1.17
 

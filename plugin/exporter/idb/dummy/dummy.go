@@ -5,8 +5,8 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
+	"github.com/algorand/conduit-cockroachdb/plugin/exporter/idb"
 	"github.com/algorand/indexer/v3/types"
-	"github.com/shiqizng/cockroachdb-exporter/plugin/exporter/idb"
 
 	sdk "github.com/algorand/go-algorand-sdk/v2/types"
 )

@@ -4,9 +4,9 @@ import (
 	"context"
 	"testing"
 
+	_ "github.com/algorand/conduit-cockroachdb/plugin/exporter/idb/cockroach"
+	_ "github.com/algorand/conduit-cockroachdb/plugin/exporter/idb/dummy"
 	sdk "github.com/algorand/go-algorand-sdk/v2/types"
-	_ "github.com/shiqizng/cockroachdb-exporter/plugin/exporter/idb/cockroach"
-	_ "github.com/shiqizng/cockroachdb-exporter/plugin/exporter/idb/dummy"
 	"github.com/sirupsen/logrus"
 	"github.com/sirupsen/logrus/hooks/test"
 	"github.com/stretchr/testify/assert"

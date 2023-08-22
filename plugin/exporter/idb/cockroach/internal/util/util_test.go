@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"testing"
 
+	test "github.com/algorand/conduit-cockroachdb/plugin/exporter/idb/cockroach/internal/testing"
+	"github.com/algorand/conduit-cockroachdb/plugin/exporter/idb/cockroach/internal/util"
 	"github.com/jackc/pgconn"
 	"github.com/jackc/pgerrcode"
 	"github.com/jackc/pgx/v4"
-	test "github.com/shiqizng/cockroachdb-exporter/plugin/exporter/idb/cockroach/internal/testing"
-	"github.com/shiqizng/cockroachdb-exporter/plugin/exporter/idb/cockroach/internal/util"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

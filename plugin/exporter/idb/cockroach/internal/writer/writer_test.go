@@ -7,25 +7,25 @@ import (
 	"testing"
 	"time"
 
+	"github.com/algorand/conduit-cockroachdb/plugin/exporter/idb/cockroach/internal/encoding"
+	"github.com/algorand/conduit-cockroachdb/plugin/exporter/idb/cockroach/internal/schema"
+	pgutil "github.com/algorand/conduit-cockroachdb/plugin/exporter/idb/cockroach/internal/util"
+	"github.com/algorand/conduit-cockroachdb/plugin/exporter/idb/cockroach/internal/writer"
 	"github.com/jackc/pgx/v4"
 	"github.com/jackc/pgx/v4/pgxpool"
-	"github.com/shiqizng/cockroachdb-exporter/plugin/exporter/idb/cockroach/internal/encoding"
-	"github.com/shiqizng/cockroachdb-exporter/plugin/exporter/idb/cockroach/internal/schema"
-	pgutil "github.com/shiqizng/cockroachdb-exporter/plugin/exporter/idb/cockroach/internal/util"
-	"github.com/shiqizng/cockroachdb-exporter/plugin/exporter/idb/cockroach/internal/writer"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
 	"github.com/algorand/avm-abi/apps"
-	"github.com/shiqizng/cockroachdb-exporter/plugin/exporter/idb"
+	"github.com/algorand/conduit-cockroachdb/plugin/exporter/idb"
 
 	"github.com/algorand/indexer/v3/types"
 	"github.com/algorand/indexer/v3/util"
 	"github.com/algorand/indexer/v3/util/test"
 
+	dbtest "github.com/algorand/conduit-cockroachdb/plugin/exporter/idb/cockroach/internal/testing"
 	crypto2 "github.com/algorand/go-algorand-sdk/v2/crypto"
 	sdk "github.com/algorand/go-algorand-sdk/v2/types"
-	dbtest "github.com/shiqizng/cockroachdb-exporter/plugin/exporter/idb/cockroach/internal/testing"
 )
 
 var serializable = pgx.TxOptions{IsoLevel: pgx.Serializable}
